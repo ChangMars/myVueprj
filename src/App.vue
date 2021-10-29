@@ -26,8 +26,11 @@
               :to="{
                 name: '新增頁面'
               }"
-               class="nav-link">新增頁面</router-link
-            >
+               class="nav-link">新增頁面
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/stock" class="nav-link">Stock Table</router-link>
           </li>
         </ul>
       </div>
@@ -52,7 +55,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "bootstrap";
+// @import "./assets/sass/paper-dashboard";
+@import "./assets/all.scss";
+// @import "bootstrap";
 body {
   padding-top: 80px
 }
