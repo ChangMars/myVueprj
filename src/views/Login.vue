@@ -1,11 +1,11 @@
 <template>
   <div class="container mt-5">
-    <form calss="row justify-content-center"
+    <form class="row justify-content-center"
     @submit.prevent="signIn">
       <div class="col-md-6">
         <h1 class="h3 mb-3 font-weight-normal">請登入</h1>
         <div class="mb-2">
-          <lable for="inputEmail" calss="sr-only">Email address</lable>
+          <label for="inputEmail" class="sr-only">Email address</label>
           <input
             type="email"
             id="inputEmail"
@@ -17,7 +17,7 @@
           />
         </div>
         <div class="mb-2">
-          <lable for="inputPassword" calss="sr-only">Email address</lable>
+          <label for="inputPassword" class="sr-only">Password</label>
           <input
             type="password"
             id="inputPassword"
@@ -50,7 +50,6 @@ export default {
   methods: {
     signIn() {
       const api = `${process.env.VUE_APP_API}admin/signin`;
-      console.log(api);
       this.$http.post(api, this.user)
         .then((res) => {
           if (res.data.success) {
@@ -58,7 +57,7 @@ export default {
             // console.log(token, expired);
             document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
             // console.log(res);
-            this.$router.push('/dashboard');
+            this.$router.push('/dashboard/products');
           }
         });
     },
