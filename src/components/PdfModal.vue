@@ -11,15 +11,17 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
         <h5 class="modal-title" id="exampleModalLabel">
-          <span v-if="tempStock.stock.name">{{ tempStock.stock.name }}</span>
+          <span v-if="tempStock.stock.name && tempStock.date">
+            {{ tempStock.stock.name + tempStock.date}}</span>
         </h5>
         <button type="button"
         class="btn-close bg-success"
         data-bs-dismiss="modal"
         aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="height:800px">
-          <iframe name="pdf" :src="tempStock.pdf_url" width="100%" height="100%"></iframe>
+        <div class="modal-body" style="height:100vh" >
+          <!-- <iframe name="pdf" :src="tempStock.pdf_url" width="100%" height="100%"></iframe> -->
+          <embed :src="tempStock.pdf_url" width="100%" height="100%" />
         </div>
         <div class="modal-footer">
           <h6 class="bg-danger" style="margin: 0 auto;">

@@ -138,7 +138,6 @@ export default {
     },
   },
   created() {
-    this.getProducts();
   },
 };
 </script>
