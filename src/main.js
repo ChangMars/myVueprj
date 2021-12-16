@@ -8,8 +8,8 @@ import { required, email, min } from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import 'bootstrap';
-import Loading from 'vue3-loading-overlay'; // Import component
-import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'; // Import stylesheet
+import Loading from 'vue3-loading-overlay'; // Import component 讀取跑圈功能
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'; // Import stylesheet 讀取跑圈功能
 
 import App from './App.vue';
 import router from './router';

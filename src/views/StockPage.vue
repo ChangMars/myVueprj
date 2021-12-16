@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div>最新研究報告列表</div>
    <div class="text-end">
     <button class="btn btn-primary" type="button">
@@ -26,9 +27,10 @@
         <td>{{ item.price }}</td>
         <td>{{ item.ratio }}</td>
         <td>
-          <a :href="item.pdf_url">
-            pdf
-          </a>
+          <button type="button" class="btn btn-outline-danger"
+          @click="openModal(item)">
+            報告
+          </button>
         </td>
       </tr>
     </tbody>
@@ -36,11 +38,14 @@
   <Pagination
   :pages="pagination"
   @emit-pages="getStocks"></Pagination>
+  <PdfModal ref="pdfModal"
+  :stock="tempStock"></PdfModal>
 </template>
 <script>
 import axios from 'axios';
 // import PaperTable from '@/components/PaperTable.vue';
 import Pagination from '../components/Pagination.vue';
+import PdfModal from '../components/PdfModal.vue';
 
 // const tableColumns = ['id', 'name', 'broker', 'date', 'rating', 'price', 'ratio', 'pdf_url'];
 // const tableData = [
@@ -57,8 +62,8 @@ export default {
   components: {
     // PaperTable,
     Pagination,
+    PdfModal,
   },
-  inject: ['emitter'],
   data() {
     // console.log('data'); // 1
     return {
@@ -68,6 +73,8 @@ export default {
         has_pre: false,
         has_next: true,
       },
+      isLoading: false,
+      tempStock: {},
       // table1: {
       //   title: 'Stripped Table',
       //   subTitle: 'Here is a subtitle for this table',
@@ -79,6 +86,7 @@ export default {
   created() {
     this.getStocks();
   },
+
   // created() {
   //   console.log('created'); // 2
   //   const pagenum = parseInt(this.$route.params.id, 10); // route為路由相關資訊透過parseInt轉成int
@@ -140,9 +148,17 @@ export default {
   //     });
   //   });
   // },
+
   methods: {
+    openModal(item) {
+      console.log(item);
+      this.tempStock = { ...item };
+      const pdfComponent = this.$refs.pdfModal;
+      pdfComponent.showModal();
+    },
     getStocks(pagenum = 1) {
-      console.log(pagenum);
+      console.log(`getStocksNum:${pagenum}`);
+      this.isLoading = true;
       const require = { page: pagenum };
       const params = JSON.stringify(require);
       axios.post('https://taiwan-stock-winner.tk/api/v0/report/latest/', params, {
@@ -150,6 +166,7 @@ export default {
           'Content-Type': 'application/json',
         },
       }).then((res) => {
+        this.isLoading = false;
         console.log(res.data);
         if (res.data.s) {
           this.stocks = res.data.result;
@@ -162,5 +179,3 @@ export default {
   },
 };
 </script>
-<style>
-</style>

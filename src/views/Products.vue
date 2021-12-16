@@ -2,7 +2,7 @@
   <Loading :active="isLoading"></Loading>
   <div class="text-end">
     <button class="btn btn-primary" type="button"
-    @click="openModal">
+    @click="openModal(true)">
       增加一個產品
     </button>
   </div>
@@ -29,7 +29,8 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm">編輯</button>
+            <button class="btn btn-outline-primary btn-sm"
+            @click="openModal(false, item)">編輯</button>
             <button class="btn btn-outline-danger btn-sm"
             @click="openDelProductModal(item)">刪除</button>
           </div>
@@ -65,6 +66,7 @@ export default {
       products: [],
       pagination: {},
       tempProduct: {},
+      isNew: false,
       isLoading: false,
     };
   },
@@ -84,8 +86,13 @@ export default {
           }
         });
     },
-    openModal() {
-      this.tempProduct = {};
+    openModal(isNew, item) {
+      console.log(isNew, item);
+      if (isNew) {
+        this.tempProduct = {};
+      } else {
+        this.tempProduct = { ...item };
+      }
       const productComponent = this.$refs.productModal;
       productComponent.showModal();
     },
