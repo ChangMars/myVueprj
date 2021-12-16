@@ -5,7 +5,7 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/myvueprj/dist/'
-    : '/dist/',
+    : '/myvueprj/dist/',
     devServer: {
       proxy: {
         '/api': {

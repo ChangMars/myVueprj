@@ -11,7 +11,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
         <h5 class="modal-title" id="exampleModalLabel">
-          <span>{{ tempStock.stock.name + tempStock.date }}</span>
+          <span v-if="tempStock.stock.name">{{ tempStock.stock.name }}</span>
         </h5>
         <button type="button"
         class="btn-close bg-success"
@@ -47,7 +47,12 @@ export default {
   data() {
     return {
       modal: {},
-      tempStock: {},
+      tempStock: {
+        stock: {
+          name: '',
+        },
+        date: '',
+      },
     };
   },
   watch: { // 監聽
@@ -68,6 +73,7 @@ export default {
     },
   },
   mounted() {
+    console.log('mounted');
     this.modal = new Modal(this.$refs.modal);
   },
 };
