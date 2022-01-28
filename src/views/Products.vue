@@ -106,13 +106,13 @@ export default {
       // console.log(item);
       this.tempProduct = item;
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
-      const productComponent = this.$refs.productModal;
       this.$http.post(api, { data: this.tempProduct }).then(
         (response) => {
           console.log(response);
-          productComponent.hideModal();
+          const productComponent = this.$refs.productModal;
           if (response.data.success) {
             this.getProducts();
+            productComponent.hideModal();
             this.emitter.emit('push-message', {
               style: 'success',
               title: '更新成功',
@@ -132,12 +132,25 @@ export default {
       this.$http.delete(url).then((response) => {
         console.log(response.data);
         const delComponent = this.$refs.delModal;
-        delComponent.hideModal();
-        this.getProducts();
+        if (response.data.success) {
+          this.getProducts();
+          delComponent.hideModal();
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '刪除成功',
+          });
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '刪除失敗',
+            content: response.data.message.join('、'),
+          });
+        }
       });
     },
   },
   created() {
+    this.getProducts();
   },
 };
 </script>

@@ -2,7 +2,8 @@
   <Loading :active="isLoading"></Loading>
   <div>最新研究報告列表</div>
    <div class="text-end">
-    <button class="btn btn-primary" type="button">
+    <button class="btn btn-primary" type="button"
+    @click="opneSearchModal">
       查詢研究報告
     </button>
   </div>
@@ -40,12 +41,16 @@
   @emit-pages="getStocks"></Pagination>
   <PdfModal ref="pdfModal"
   :stock="tempStock"></PdfModal>
+  <SearchModal ref="searchModal">
+
+  </SearchModal>
 </template>
 <script>
 import axios from 'axios';
 // import PaperTable from '@/components/PaperTable.vue';
 import Pagination from '../components/Pagination.vue';
 import PdfModal from '../components/PdfModal.vue';
+import SearchModal from '../components/SearchModal.vue';
 
 // const tableColumns = ['id', 'name', 'broker', 'date', 'rating', 'price', 'ratio', 'pdf_url'];
 // const tableData = [
@@ -63,6 +68,7 @@ export default {
     // PaperTable,
     Pagination,
     PdfModal,
+    SearchModal,
   },
   data() {
     // console.log('data'); // 1
@@ -155,6 +161,10 @@ export default {
       this.tempStock = { ...item };
       const pdfComponent = this.$refs.pdfModal;
       pdfComponent.showModal();
+    },
+    opneSearchModal() {
+      const searchComponent = this.$refs.searchModal;
+      searchComponent.showModal();
     },
     getStocks(pagenum = 1) {
       console.log(`getStocksNum:${pagenum}`);
