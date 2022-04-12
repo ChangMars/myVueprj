@@ -89,71 +89,67 @@ export default {
       // },
     };
   },
-  created() {
-    this.getStocks();
-  },
-
   // created() {
-  //   console.log('created'); // 2
-  //   const pagenum = parseInt(this.$route.params.id, 10); // route為路由相關資訊透過parseInt轉成int
-  //   console.log(pagenum);
-  //   const require = { page: 1 };
-  //   console.log(require);
-  //   const params = JSON.stringify(require);
-  //   // axios 加入 headers 方式一
-  //   // axios({
-  //   //   method: 'post',
-  //   //   baseURL: 'https://taiwan-stock-winner.tk',
-  //   //   url: '/api/v0/report/latest/',
-  //   //   headers: {
-  //   //     // crossDomain: true,
-  //   //     // changOrigin: true,
-  //   //     // withCredentials: true,
-  //   //     // Accept: 'application/json',
-  //   //     'Content-Type': 'application/json',
-  //   //     // 'Access-Control-Allow-Origin': '*',
-  //   //     // 'Access-Control-Allow-Methods': '*',
-  //   //   },
-  //   //   data: params,
-  //   // }).then((res) => {
-  //   //   console.log(res);
-  //   //   res.data.result.forEach((element) => {
-  //   //     const e = {
-  //   //       id: element.stock.stockId,
-  //   //       name: element.stock.name,
-  //   //       broker: element.broker,
-  //   //       date: element.date,
-  //   //       rating: element.rating,
-  //   //       price: element.price,
-  //   //       ratio: element.ratio,
-  //   //       pdf_url: element.pdf_url,
-  //   //     };
-  //   //     this.table1.data.push(e);
-  //   //   });
-  //   // });
-  //   // axios 加入 headers 方式二
-  //   axios.post('https://taiwan-stock-winner.tk/api/v0/report/latest/', params, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   }).then((res) => {
-  //     console.log(res);
-  //     res.data.result.forEach((element) => {
-  //       const e = {
-  //         id: element.stock.stockId,
-  //         name: element.stock.name,
-  //         broker: element.broker,
-  //         date: element.date,
-  //         rating: element.rating,
-  //         price: element.price,
-  //         ratio: element.ratio,
-  //         pdf_url: element.pdf_url,
-  //       };
-  //       this.table1.data.push(e);
-  //       this.stocks.push(e);
-  //     });
-  //   });
+  //   this.getStocks();
   // },
+
+  created() {
+    console.log('created'); // 2
+    // const pagenum = parseInt(this.$route.params.id, 10); // route為路由相關資訊透過parseInt轉成int
+    // console.log(pagenum);
+    // const require = { page: 1 };
+    // console.log(require);
+    // const params = JSON.stringify(require);
+    // axios 加入 headers 方式一
+    // axios({
+    //   method: 'post',
+    //   baseURL: 'https://taiwan-stock-winner.tk',
+    //   url: '/api/v0/report/latest/',
+    //   headers: {
+    //     // crossDomain: true,
+    //     // changOrigin: true,
+    //     // withCredentials: true,
+    //     // Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     // 'Access-Control-Allow-Origin': '*',
+    //     // 'Access-Control-Allow-Methods': '*',
+    //   },
+    //   data: params,
+    // }).then((res) => {
+    //   console.log(res);
+    //   res.data.result.forEach((element) => {
+    //     const e = {
+    //       id: element.stock.stockId,
+    //       name: element.stock.name,
+    //       broker: element.broker,
+    //       date: element.date,
+    //       rating: element.rating,
+    //       price: element.price,
+    //       ratio: element.ratio,
+    //       pdf_url: element.pdf_url,
+    //     };
+    //     this.table1.data.push(e);
+    //   });
+    // });
+    // axios 加入 headers 方式二
+    axios.get('https://datacenter.taichung.gov.tw/swagger/OpenData/f7f99d74-25de-4673-87be-d8a7877fcbfd').then((res) => {
+      console.log(res);
+      res.data.result.forEach((element) => {
+        const e = {
+          id: element.stock.stockId,
+          name: element.stock.name,
+          broker: element.broker,
+          date: element.date,
+          rating: element.rating,
+          price: element.price,
+          ratio: element.ratio,
+          pdf_url: element.pdf_url,
+        };
+        this.table1.data.push(e);
+        this.stocks.push(e);
+      });
+    });
+  },
 
   methods: {
     openModal(item) {
@@ -169,11 +165,13 @@ export default {
     getStocks(pagenum = 1) {
       console.log(`getStocksNum:${pagenum}`);
       this.isLoading = true;
-      const require = { page: pagenum };
+      const require = { page: 1 };
       const params = JSON.stringify(require);
+      console.log(params);
       axios.post('https://taiwan-stock-winner.tk/api/v0/report/latest/', params, {
         headers: {
           'Content-Type': 'application/json',
+          crossDomain: true,
         },
       }).then((res) => {
         this.isLoading = false;
@@ -184,6 +182,8 @@ export default {
           this.pagination.current_page = pagenum;
           this.pagination.has_pre = (pagenum !== 1);
         }
+      }).catch((error) => { // 请求失败处理
+        console.log(error);
       });
     },
   },
