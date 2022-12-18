@@ -1,49 +1,46 @@
 <template>
-  <Loading :active="isLoading"></Loading>
-  <div>最新研究報告列表</div>
-   <div class="text-end">
-    <button class="btn btn-primary" type="button"
-    @click="opneSearchModal">
-      查詢研究報告
-    </button>
-  </div>
-  <table class="table mt-4">
-    <thead>
-      <tr>
-        <th>股票代號</th>
-        <th>股票名稱</th>
-        <th>報告卷商</th>
-        <th>日期</th>
-        <th>價格</th>
-        <th>PE值</th>
-        <th>下載網址</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item) in stocks" :key="item.id">
-        <td>{{ item.stock.stockId}}</td>
-        <td>{{ item.stock.name}}</td>
-        <td>{{ item.broker }}</td>
-        <td>{{ item.date }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.ratio }}</td>
-        <td>
-          <button type="button" class="btn btn-outline-danger"
-          @click="openModal(item)">
-            報告
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <Pagination
-  :pages="pagination"
-  @emit-pages="getStocks"></Pagination>
-  <PdfModal ref="pdfModal"
-  :stock="tempStock"></PdfModal>
-  <SearchModal ref="searchModal">
+  <div>
+    <Loading :active="isLoading"></Loading>
+    <div>最新研究報告列表</div>
+    <div class="text-end">
+      <button class="btn btn-primary" type="button" @click="opneSearchModal">
+        查詢研究報告
+      </button>
+    </div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>股票代號</th>
+          <th>股票名稱</th>
+          <th>報告卷商</th>
+          <th>日期</th>
+          <th>價格</th>
+          <th>PE值</th>
+          <th>下載網址</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item) in stocks" :key="item.id">
+          <td>{{ item.stock.stockId }}</td>
+          <td>{{ item.stock.name }}</td>
+          <td>{{ item.broker }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.ratio }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-danger" @click="openModal(item)">
+              報告
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <Pagination :pages="pagination" @emit-pages="getStocks"></Pagination>
+    <PdfModal ref="pdfModal" :stock="tempStock"></PdfModal>
+    <SearchModal ref="searchModal">
 
-  </SearchModal>
+    </SearchModal>
+  </div>
 </template>
 <script>
 import axios from 'axios';
