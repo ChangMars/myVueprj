@@ -33,7 +33,7 @@ export default {
       .then((res) => {
         console.log(res);
         if (!res.data.success) {
-          this.$router.push('/login');
+          this.$router.push({ name: 'Login' });
         }
       });
   },

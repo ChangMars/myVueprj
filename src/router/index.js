@@ -9,86 +9,86 @@ const routes = [
     redirect: '/dashboard',
     children: [
       {
-        path: '/home',
-        name: 'Home',
-        component: Home,
-      },
-      {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-      },
-      {
-        path: 'newpage',
-        name: '新增頁面',
-        component: () => import('../views/NewPage.vue'),
-        children: [ // 槽狀路由
-          {
-            path: 'a',
-            component: () => import('../components/ComponentA.vue'),
-          },
-          {
-            path: 'b',
-            component: () => import('../components/ComponentB.vue'),
-          },
-          {
-            path: 'dynamicRouter/:id', // 加上 : 為動態路由 id可隨意取名
-            component: () => import('../views/DynamicRouter.vue'),
-          },
-          {
-            path: 'dynamicRouterByProps/:id', // 透過 props 方式結合動態路由
-            component: () => import('../views/DynamicRouterByProps.vue'),
-            props: (route) => {
-              console.log('route', route);
-              return {
-                id: route.params.id,
-              };
-            },
-          },
-          {
-            path: 'RouterNavigation/',
-            component: () => import('../views/RouterNavigation.vue'),
-          },
-          {
-            path: 'namedView',
-            component: () => import('../views/NamedView.vue'),
-            children: [
-              {
-                path: 'c2a',
-                components: {
-                  left: () => import('../components/ComponentC.vue'),
-                  right: () => import('../components/ComponentA.vue'),
-                },
-              },
-              {
-                path: 'c2b',
-                components: {
-                  left: () => import('../components/ComponentC.vue'),
-                  right: () => import('../components/ComponentB.vue'),
-                },
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: '/stock',
-        name: 'Stock',
-        component: () => import('../views/StockPage.vue'),
-      },
-      {
-        path: '/login',
-        component: () => import('../views/Login.vue'),
-      },
-      {
-        path: '/dashboard',
+        path: 'dashboard',
         component: () => import('../views/Dashboard.vue'),
         children: [
           {
+            path: 'home',
+            name: 'Home',
+            component: Home,
+          },
+          {
+            path: 'about',
+            name: 'About',
+            component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+          },
+          {
+            path: 'newpage',
+            name: '新增頁面',
+            component: () => import('../views/NewPage.vue'),
+            children: [
+              // 槽狀路由
+              {
+                path: 'a',
+                component: () => import('../components/ComponentA.vue'),
+              },
+              {
+                path: 'b',
+                component: () => import('../components/ComponentB.vue'),
+              },
+              {
+                path: 'dynamicRouter/:id', // 加上 : 為動態路由 id可隨意取名
+                component: () => import('../views/DynamicRouter.vue'),
+              },
+              {
+                path: 'dynamicRouterByProps/:id', // 透過 props 方式結合動態路由
+                component: () => import('../views/DynamicRouterByProps.vue'),
+                props: (route) => {
+                  console.log('route', route);
+                  return {
+                    id: route.params.id,
+                  };
+                },
+              },
+              {
+                path: 'RouterNavigation/',
+                component: () => import('../views/RouterNavigation.vue'),
+              },
+              {
+                path: 'namedView',
+                component: () => import('../views/NamedView.vue'),
+                children: [
+                  {
+                    path: 'c2a',
+                    components: {
+                      left: () => import('../components/ComponentC.vue'),
+                      right: () => import('../components/ComponentA.vue'),
+                    },
+                  },
+                  {
+                    path: 'c2b',
+                    components: {
+                      left: () => import('../components/ComponentC.vue'),
+                      right: () => import('../components/ComponentB.vue'),
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: '/stock',
+            name: 'Stock',
+            component: () => import('../views/StockPage.vue'),
+          },
+          {
+            path: 'login',
+            name: 'Login',
+            component: () => import('../views/Login.vue'),
+          },
+          {
             path: 'products',
+            name: 'Products',
             component: () => import('../views/Products.vue'),
           },
         ],
@@ -123,8 +123,7 @@ const router = createRouter({
         top: 0,
       };
     }
-    return {
-    };
+    return {};
   },
 });
 

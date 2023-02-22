@@ -17,10 +17,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <router-link to="/home" class="nav-link">Home</router-link>
+                <router-link :to="{ name: 'Home' }" class="nav-link">Home</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/about" class="nav-link">About</router-link>
+                <router-link :to="{ name: 'About' }" class="nav-link">About</router-link>
               </li>
               <li class="nav-item">
                 <router-link
@@ -30,11 +30,11 @@
                   class="nav-link">新增頁面
                 </router-link>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <router-link to="/stock" class="nav-link">Stock Table</router-link>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <router-link to="/dashboard/products" class="nav-link">產品列表</router-link>
+                <router-link :to="{ name: 'Products' }" class="nav-link">產品列表</router-link>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" @click.prevent="logout">登出</a>
@@ -65,7 +65,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             console.log(res);
-            this.$router.push('/login');
+            this.$router.push({ name: 'Login' });
           }
         });
     },

@@ -1,10 +1,16 @@
 <template>
-  <button class="btn btn-primary" type="button" @click="getRoute">getRoute</button>
+  <button class="btn btn-primary" type="button" @click="getRoute">
+    getRoute
+  </button>
   <button class="btn btn-primary" type="button" @click="push">Push</button>
-  <button class="btn btn-primary" type="button" @click="replace">Replace</button>
+  <button class="btn btn-primary" type="button" @click="replace">
+    Replace
+  </button>
   <button class="btn btn-primary" type="button" @click="go">Go</button>
   <hr />
-  <button class="btn btn-primary" type="button" @click="addRoute">新增路由</button>
+  <button class="btn btn-primary" type="button" @click="addRoute">
+    新增路由
+  </button>
 </template>
 
 <script>

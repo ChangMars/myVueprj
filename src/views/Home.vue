@@ -22,6 +22,7 @@
       <button class="btn me-2 btn-outline-primary" type="button" @click="validate">驗證</button>
       <button class="btn btn-primary" type="submit">Submit</button>
     </Form>
+    <button @click="toastnotify">測試按鈕</button>
   </div>
 </template>
 
@@ -36,9 +37,17 @@ export default {
       user: {},
     };
   },
+  inject: ['emitter'],
   methods: {
     onSubmit() {
       console.log(this.user);
+    },
+    toastnotify() {
+      console.log(this.user);
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '刪除成功',
+      });
     },
   },
   created() {

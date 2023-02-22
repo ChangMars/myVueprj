@@ -129,23 +129,23 @@ export default {
     //   });
     // });
     // axios 加入 headers 方式二
-    axios.get('https://datacenter.taichung.gov.tw/swagger/OpenData/f7f99d74-25de-4673-87be-d8a7877fcbfd').then((res) => {
-      console.log(res);
-      res.data.result.forEach((element) => {
-        const e = {
-          id: element.stock.stockId,
-          name: element.stock.name,
-          broker: element.broker,
-          date: element.date,
-          rating: element.rating,
-          price: element.price,
-          ratio: element.ratio,
-          pdf_url: element.pdf_url,
-        };
-        this.table1.data.push(e);
-        this.stocks.push(e);
-      });
-    });
+    // axios.get('https://datacenter.taichung.gov.tw/swagger/OpenData/f7f99d74-25de-4673-87be-d8a7877fcbfd').then((res) => {
+    //   console.log(res);
+    //   res.data.result.forEach((element) => {
+    //     const e = {
+    //       id: element.stock.stockId,
+    //       name: element.stock.name,
+    //       broker: element.broker,
+    //       date: element.date,
+    //       rating: element.rating,
+    //       price: element.price,
+    //       ratio: element.ratio,
+    //       pdf_url: element.pdf_url,
+    //     };
+    //     this.table1.data.push(e);
+    //     this.stocks.push(e);
+    //   });
+    // });
   },
 
   methods: {
