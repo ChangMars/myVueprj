@@ -25,9 +25,9 @@
               <li class="nav-item">
                 <router-link
                   :to="{
-                    name: '新增頁面'
+                    name: '路由練習'
                   }"
-                  class="nav-link">新增頁面
+                  class="nav-link">路由練習
                 </router-link>
               </li>
               <!-- <li class="nav-item">

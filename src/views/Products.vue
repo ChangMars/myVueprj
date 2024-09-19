@@ -74,8 +74,9 @@ export default {
     currency,
     getProducts(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`;
+      // const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`;
       this.isLoading = true;
-      console.log(api);
+      console.log(page, api);
       this.$http.get(api)
         .then((res) => {
           this.isLoading = false;
@@ -102,8 +103,8 @@ export default {
       delComponent.showModal();
     },
     updateProduct(item) {
-      // console.log('updateProduct');
-      // console.log(item);
+      console.log('updateProduct');
+      console.log(item);
       this.tempProduct = item;
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
       this.$http.post(api, { data: this.tempProduct }).then(
